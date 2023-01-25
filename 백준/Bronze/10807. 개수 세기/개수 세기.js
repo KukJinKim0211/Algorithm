@@ -6,10 +6,8 @@ let input = require("fs")
 input.shift();
 const num = input.pop();
 let cnt = 0;
-input
+const data = input
   .shift()
   .split(" ")
-  .map((d) => {
-    if (d === num) cnt++;
-  });
-console.log(cnt);
+  .filter((d) => d === num);
+console.log(data.length);
