@@ -4,14 +4,19 @@ let input = require("fs")
   .trim()
   .split("\n");
 
-const [N, arrayN, M, arrayM] = input;
-const arrayObj = {};
-for (const n of arrayN.split(" ")) {
-  arrayObj[n] = arrayObj[n] === undefined ? 1 : arrayObj[n] + 1;
+const arrayN = input[1].split(" ").map((d) => +d);
+const arrayM = input[3].split(" ").map((d) => +d);
+
+const map = new Map();
+
+for (const n of arrayN) {
+  if (map.has(n)) map.set(n, map.get(n) + 1);
+  else map.set(n, 1);
 }
 const answer = [];
-for (const m of arrayM.split(" ")) {
-  answer.push(arrayObj[m] === undefined ? 0 : arrayObj[m]);
+for (const m of arrayM) {
+  if (map.has(m)) answer.push(map.get(m));
+  else answer.push(0);
 }
 
 console.log(answer.join(" "));
